@@ -15,7 +15,6 @@
         "google"
     ],
     "rules": {
-        "no-unused-vars": "warn",
-        "require-jsdoc": "warn"
+        "no-unused-vars": "warn"
     }
 }

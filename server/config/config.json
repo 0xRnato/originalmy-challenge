@@ -1,0 +1,17 @@
+{
+  "dev": {
+    "PORT": 3000,
+    "MONGODB_URL": "mongodb://localhost:27017/originalmy-dev",
+    "JWT_SECRET": "0r1g1n4lmy-dev"
+  },
+  "test": {
+    "PORT": 3000,
+    "MONGODB_URL": "mongodb://localhost:27017/originalmy-test",
+    "JWT_SECRET": "0r1g1n4lmy-test"
+  },
+  "prod": {
+    "PORT": 3000,
+    "MONGODB_URL": "mongodb://localhost:27017/originalmy-prod",
+    "JWT_SECRET": "0r1g1n4lmy-prod"
+  }
+}
