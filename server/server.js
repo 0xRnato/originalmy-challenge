@@ -3,19 +3,20 @@ const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
+const favicon = require('serve-favicon');
 
 require('./config/config');
-require('./db/db');
-const user = require('./routes/user.route');
+const db = require('./db/db');
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'client/')));
+// app.use(favicon(path.join(__dirname, 'client', 'favicon.ico')));
 
-app.use('/api/user', user);
+require('./routes/user.route')(app, db);
 
-app.get('*', (req, res)=>{
+app.get('*', (req, res) => {
     res.sendFile(path.resolve('client/index.html'));
 });
 

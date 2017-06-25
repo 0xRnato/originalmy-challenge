@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 /** Class representing a user */
 class UserController {
     /**
-     * Save User
+     * Save UserModel
      * @param {Object} userData - An object that contains user data
      * @return {Promisse}
      * @description Used to save or create a new user on database
@@ -11,26 +11,50 @@ class UserController {
     save(userData) {
         const self = this;
         return new Promise((resolve, reject) => {
-            self.UserModel.findOneAndUpdate({
-                _id: userData._id,
-            }), userData, {upsert: true}, (err, doc) => {
-                if (err) {
-                    reject({
-                        success: false,
-                        message: err,
+            if (userData.id) {
+                self.UserModel.get(userData.id, (err, data) => {
+                    // update data of object on db
+                    for (let i in data) {
+                        if (data.hasOwnProperty(i)) {
+                            data[i] = userData[i];
+                        }
+                    }
+                    // saving changes
+                    data.save((err) => {
+                        if (err) {
+                            reject({
+                                success: false,
+                                err: err,
+                            });
+                        } else {
+                            resolve({
+                                success: true,
+                                data: data,
+                            });
+                        }
                     });
-                } else {
-                    resolve({
-                        success: true,
-                        message: doc,
-                    });
-                }
-            };
+                });
+            } else {
+                // create a new object in db and save
+                self.UserModel.create(userData, (err, data) => {
+                    if (err) {
+                        reject({
+                            success: false,
+                            err: err.err,
+                        });
+                    } else {
+                        resolve({
+                            success: true,
+                            data: data,
+                        });
+                    }
+                });
+            }
         });
     }
 
     /**
-     * Atuhenticate User
+     * Atuhenticate UserModel
      * @param {Object} userData - An object that contains user data
      * @return {Promisse}
      * @description Used to authenticate a user
@@ -38,35 +62,45 @@ class UserController {
     auth(userData) {
         const self = this;
         return new Promise((resolve, reject) => {
-            self.User.findOne({username: userData.username}, (err, user) => {
-                if (err) throw err;
-                // check that the user was found
-                if (!user) {
+            self.UserModel.find({
+                username: userData.username,
+            }, (err, userList) => {
+                if (err) {
                     reject({
                         success: false,
-                        message: 'Authentication falied. User not found.',
+                        err: err.err,
                     });
-                } else if (user) {
-                    // check if password match
-                    if (user.password != userData.password) {
+                }
+                if (userList.length === 0) {
+                    reject({
+                        success: false,
+                        err: 'Authentication falied. User not found.',
+                    });
+                } else {
+                    if (userList[0].password != userData.password) {
                         reject({
                             success: false,
-                            message: 'Authentication falied. Wrong password.',
+                            err: 'Authentication falied. Wrong password.',
                         });
                     } else {
                         // if user is found and password is right
                         // create a token
-                        const token = jwt.sign(user, process.env.JWT_SECRET, {
+                        userList[0].token = null;
+                        const token = jwt.sign(
+                            userList[0], process.env.JWT_SECRET, {
                             expiresIn: 120,
                         });
-                        self.save(user).then((response) => {
+                        userList[0].token = token;
+                        self.save(userList[0]).then((response) => {
                             resolve({
                                 success: true,
-                                message: 'Enjoy your token!',
                                 token: token,
                             });
-                        }).catch((error) => {
-                            reject(error);
+                        }).catch((err) => {
+                            reject({
+                                success: false,
+                                err: err.err,
+                            });
                         });
                     }
                 }
@@ -82,48 +116,78 @@ class UserController {
      */
     removeToken(userData) {
         const self = this;
-        userData.token = undefined;
         return new Promise((resolve, reject) => {
-            self.UserModel.findOneAndUpdate({
-                _id: userData._id,
-            }), userData, {upsert: false}, (err, doc) => {
-                if (err) {
+            self.load(userData)
+                .then((data) => {
+                    if (data.data[0]) {
+                        let user = data.data[0];
+                        user.token = undefined;
+                        user.save((err) => {
+                            if (err) {
+                                reject({
+                                    success: false,
+                                    err: err,
+                                });
+                            } else {
+                                resolve({
+                                    success: true,
+                                    data: user,
+                                });
+                            }
+                        });
+                    } else {
+                        reject({
+                            success: false,
+                            err: 'Logout falied, User not Found.',
+                        });
+                    }
+                }).catch((err) => {
                     reject({
                         success: false,
-                        message: err,
+                        err: err,
                     });
-                } else {
-                    resolve({
-                        success: true,
-                        message: doc,
-                    });
-                }
-            };
+                });
         });
     }
 
     /**
      * Load all users
+     * @param {Object} userData - An object that contains user data
      * @return {Promisse}
-     * @description Used to get a list with all user on database
+     * @description Used to get a list with all users on database
      */
-    load() {
+    load(userData) {
         const self = this;
         return new Promise((resolve, reject) => {
-            // FIXME: Is not connecting with the mongo
-            self.UserModel.find({}), (err, doc) => {
-                if (err) {
-                    reject({
-                        success: false,
-                        message: err,
-                    });
-                } else {
-                    resolve({
-                        success: true,
-                        message: doc,
-                    });
-                }
-            };
+            if (userData) {
+                self.UserModel.find(userData, (err, data) => {
+                    if (err) {
+                        reject({
+                            success: false,
+                            err: err.err,
+                        });
+                    } else {
+                        resolve({
+                            success: true,
+                            data: data,
+                        });
+                    }
+                });
+            } else {
+                self.UserModel.find({}, (err, data) => {
+                    if (err) {
+                        reject({
+                            success: false,
+                            err: err.err,
+                        });
+                    } else {
+                        resolve({
+                            success: true,
+                            data: data,
+                        });
+                    }
+                });
+            }
         });
     }
 
@@ -136,7 +200,7 @@ class UserController {
     }
 }
 
-module.exports = () => {
-    const UserModel = require('./user.model');
+module.exports = (db) => {
+    const UserModel = require('./user.model')(db);
     return new UserController(UserModel);
 };

@@ -1,12 +1,16 @@
-const mongoose = require('mongoose');
+const orm = require('orm');
+const config = {
+    'host': process.env.DB_HOST,
+    'database': process.env.DB_DB,
+    'user': process.env.DB_USER,
+    'password': process.env.DB_PW,
+    'protocol': process.env.DB_PROTOCOL,
+    'port': process.env.DB_PORT,
+};
 
-mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URL);
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', function callback() {
-    console.log('Connection with database succeeded.');
+const db = orm.connect(config, (err) => {
+    if (err) throw err;
+    else console.log('Connection with database succeeded.');
 });
 
-module.exports = {db};
+module.exports = db;

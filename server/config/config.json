@@ -1,17 +1,32 @@
 {
   "dev": {
     "PORT": 3000,
-    "MONGODB_URL": "mongodb://localhost:27017/originalmy-dev",
+    "DB_HOST": "localhost",
+    "DB_DB":"originalmy-api",
+    "DB_USER":"root",
+    "DB_PW": "121473",
+    "DB_PROTOCOL": "mysql",
+    "DB_PORT": "3306",
     "JWT_SECRET": "0r1g1n4lmy-dev"
   },
   "test": {
     "PORT": 3000,
-    "MONGODB_URL": "mongodb://localhost:27017/originalmy-test",
+    "DB_HOST": "localhost",
+    "DB_DB":"originalmy-api",
+    "DB_USER":"root",
+    "DB_PW": "root",
+    "DB_PROTOCOL": "mysql",
+    "DB_PORT": "3306",
     "JWT_SECRET": "0r1g1n4lmy-test"
   },
   "prod": {
     "PORT": 3000,
-    "MONGODB_URL": "mongodb://localhost:27017/originalmy-prod",
+    "DB_HOST": "localhost",
+    "DB_DB":"originalmy-api",
+    "DB_USER":"root",
+    "DB_PW": "root",
+    "DB_PROTOCOL": "mysql",
+    "DB_PORT": "3306",
     "JWT_SECRET": "0r1g1n4lmy-prod"
   }
 }
