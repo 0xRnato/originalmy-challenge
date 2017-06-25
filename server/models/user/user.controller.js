@@ -88,7 +88,7 @@ class UserController {
                         userList[0].token = null;
                         const token = jwt.sign(
                             userList[0], process.env.JWT_SECRET, {
-                            expiresIn: 120,
+                            expiresIn: 20,
                         });
                         userList[0].token = token;
                         self.save(userList[0]).then((response) => {

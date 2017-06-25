@@ -11,8 +11,7 @@ const auth = (req, res, next) => {
             if (err) {
                 return res.json({
                     success: false,
-                    message: 'Falied to authenticate token.',
-                    messageError: err,
+                    err: err.message,
                 });
             } else {
                 req.decoded = decoded;
@@ -27,4 +26,4 @@ const auth = (req, res, next) => {
     }
 };
 
-module.exports = {auth};
+module.exports = auth;

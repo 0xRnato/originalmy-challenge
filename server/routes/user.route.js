@@ -2,7 +2,7 @@ module.exports = (app, db) => {
     const express = require('express');
     const router = new express.Router();
     const UserController = require('./../models/user/user.controller')(db);
-    // const auth = require('./../middleware/auth');
+    const auth = require('./../middleware/auth');
 
     router.post('/login', (req, res) => {
         UserController.auth(req.body.userData).then((data) => {
@@ -20,7 +20,7 @@ module.exports = (app, db) => {
         });
     });
 
-    router.get('/all', (req, res) => {
+    router.get('/all', auth, (req, res) => {
         UserController.load(req.body)
             .then((data) => {
                 res.send(data);
@@ -30,7 +30,7 @@ module.exports = (app, db) => {
             });
     });
 
-    router.post('/logout', (req, res) => {
+    router.post('/logout', auth, (req, res) => {
         UserController.removeToken(req.body.userData).then((data) => {
             res.send(data);
         }).catch((error) => {
