@@ -1,0 +1,10 @@
+*{
+    overflow-x: hidden;
+}
+.md-progress-bottom{
+    position: fixed;
+    bottom: 0;
+}
+.form-login{
+        width: 100%;
+    }

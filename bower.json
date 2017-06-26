@@ -1,0 +1,26 @@
+{
+  "name": "originalmy-challenge",
+  "description": "",
+  "main": "server/server.js",
+  "authors": [
+    "Renato Neto <rnato.netoo@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/zRnatoNeto/originalmy",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "client/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-material": "^1.1.4",
+    "angular-animate": "^1.6.4",
+    "angular-aria": "^1.6.4",
+    "angular-messages": "^1.6.4",
+    "angular-material-icons": "^0.7.1",
+    "angular-route": "^1.6.4"
+  }
+}

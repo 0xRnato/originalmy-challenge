@@ -15,7 +15,8 @@
         "angular"
     ],
     "rules": {
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn",
+        "angular/on-watch": 0
     },
     "globals": {
         "angular": true

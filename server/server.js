@@ -13,13 +13,13 @@ if (process.env.NODE_ENV === 'dev') {
 }
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'client/')));
-// app.use(favicon(path.join(__dirname, 'client', 'favicon.ico')));
+app.use(express.static(__dirname + '/../client'));
+app.use(favicon(path.join(__dirname, '../client', 'favicon.ico')));
 
 require('./routes/user.route')(app, db);
 
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve('client/index.html'));
+    res.sendfile(__dirname + '/client/index.html');
 });
 
 app.listen(process.env.PORT);

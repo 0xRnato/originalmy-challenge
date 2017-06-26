@@ -276,7 +276,6 @@ describe('User', () => {
                 .send({
                     'userData': {
                         'username': null,
-                        'password': null,
                     },
                 })
                 .expect(200)
@@ -289,26 +288,6 @@ describe('User', () => {
                 });
         });
 
-        it('Should warn that the password can not be empty or null', (done) => {
-            api.post('/api/user/logout')
-                .set('Content-Type', 'application/json')
-                .set('x-access-token', token)
-                .send({
-                    'userData': {
-                        'username': 'renato',
-                        'password': null,
-                    },
-                })
-                .expect(200)
-                .end((err, res) => {
-                    expect(res.body).to.have.property('success');
-                    expect(res.body.success).to.equal(false);
-                    expect(res.body).to.have.property('err');
-                    expect(res.body.err).to.equal('Password can not be void or null.');
-                    done();
-                });
-        });
-
         it('User should not be found, the username is wrong', (done) => {
             api.post('/api/user/logout')
                 .set('Content-Type', 'application/json')
@@ -316,28 +295,6 @@ describe('User', () => {
                 .send({
                     'userData': {
                         'username': 'renatoo',
-                        'password': 'roott',
-                    },
-                })
-                .expect(200)
-                .end((err, res) => {
-                    expect(res.body).to.have.property('success');
-                    expect(res.body.success).to.equal(false);
-                    expect(res.body).to.have.property('err');
-                    expect(res.body.err).to.be.a('string');
-                    expect(res.body.err).to.be.equal('Logout falied, User not Found.');
-                    done();
-                });
-        });
-
-        it('User should not be found, the password is wrong', (done) => {
-            api.post('/api/user/logout')
-                .set('Content-Type', 'application/json')
-                .set('x-access-token', token)
-                .send({
-                    'userData': {
-                        'username': 'renato',
-                        'password': 'roott',
                     },
                 })
                 .expect(200)
@@ -358,7 +315,6 @@ describe('User', () => {
                 .send({
                     'userData': {
                         'username': 'renato',
-                        'password': 'root',
                     },
                 })
                 .expect(200)

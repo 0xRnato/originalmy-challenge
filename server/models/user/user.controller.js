@@ -145,7 +145,7 @@ class UserController {
     removeToken(userData) {
         const self = this;
         return new Promise((resolve, reject) => {
-            if (userData.username && userData.password) {
+            if (userData.username) {
                 self.load(userData)
                     .then((data) => {
                         if (data.data[0]) {
@@ -181,11 +181,6 @@ class UserController {
                     reject({
                         success: false,
                         err: 'Username can not be void or null.',
-                    });
-                } else if (!userData.password) {
-                    reject({
-                        success: false,
-                        err: 'Password can not be void or null.',
                     });
                 }
             }
