@@ -24,9 +24,8 @@
 
         vm.logout = () => {
             vm.dataLoading = true;
-            // FIXME:
             ChatService.logout({
-                'userdata': {
+                'userData': {
                     'username': angular.copy($rootScope.userSession.username)
                 }
             }).then(
