@@ -40,7 +40,7 @@ class UserController {
                     if (err) {
                         reject({
                             success: false,
-                            err: err.err,
+                            err: err,
                         });
                     } else {
                         resolve({

@@ -7,34 +7,34 @@ module.exports = (app, db) => {
     router.post('/login', (req, res) => {
         UserController.auth(req.body.userData).then((data) => {
             res.send(data);
-        }).catch((error) => {
-            res.send(error);
+        }).catch((err) => {
+            res.send(err);
         });
     });
 
     router.post('/save', (req, res) => {
         UserController.save(req.body.userData).then((data) => {
             res.send(data);
-        }).catch((error) => {
-            res.send(error);
+        }).catch((err) => {
+            res.send(err);
         });
     });
 
-    router.get('/all', auth, (req, res) => {
+    router.get('/all', (req, res) => {
         UserController.load(req.body)
             .then((data) => {
                 res.send(data);
             })
-            .catch((error) => {
-                res.send(error);
+            .catch((err) => {
+                res.send(err);
             });
     });
 
-    router.post('/logout', auth, (req, res) => {
+    router.post('/logout', (req, res) => {
         UserController.removeToken(req.body.userData).then((data) => {
             res.send(data);
-        }).catch((error) => {
-            res.send(error);
+        }).catch((err) => {
+            res.send(err);
         });
     });
 
