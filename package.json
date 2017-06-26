@@ -4,7 +4,8 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "test": "export NODE_ENV='test' || SET NODE_ENV='test' && mocha **/*.test.js",
+    "test": "export NODE_ENV='test' || SET NODE_ENV='test' && mocha --timeout 60000",
+    "test-watch": "export NODE_ENV='test' || SET NODE_ENV='test' && nodemon --exec 'npm test'",
     "dev": "export NODE_ENV='dev' || SET NODE_ENV='dev' && nodemon server/server.js",
     "prod": "export NODE_ENV='prod' || SET NODE_ENV='prod' && pm2 start server/server.js -i 0 --name 'OriginalMy-server'"
   },
@@ -22,6 +23,7 @@
     "serve-favicon": "^2.4.3"
   },
   "devDependencies": {
+    "chai": "^4.0.2",
     "eslint": "^4.1.0",
     "eslint-config-angular": "^0.5.0",
     "eslint-config-google": "^0.8.0",
@@ -29,6 +31,7 @@
     "eslint-plugin-mocha": "^4.11.0",
     "mocha": "^3.4.2",
     "mocha-eslint": "^3.0.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
   }
 }

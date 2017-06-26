@@ -20,7 +20,7 @@ module.exports = (app, db) => {
         });
     });
 
-    router.get('/all', (req, res) => {
+    router.get('/all', auth, (req, res) => {
         UserController.load(req.body)
             .then((data) => {
                 res.send(data);
@@ -30,8 +30,16 @@ module.exports = (app, db) => {
             });
     });
 
-    router.post('/logout', (req, res) => {
+    router.post('/logout', auth, (req, res) => {
         UserController.removeToken(req.body.userData).then((data) => {
+            res.send(data);
+        }).catch((err) => {
+            res.send(err);
+        });
+    });
+
+    router.get('/truncate', (req, res) => {
+        UserController.clear().then((data) => {
             res.send(data);
         }).catch((err) => {
             res.send(err);

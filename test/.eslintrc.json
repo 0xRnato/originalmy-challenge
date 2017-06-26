@@ -21,6 +21,7 @@
         "no-console": "off",
         "no-unused-vars": "off",
         "no-undef": "off",
+        "max-len":"off",
         "mocha/no-exclusive-tests": "error"
     }
 }

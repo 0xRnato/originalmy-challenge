@@ -8,7 +8,9 @@ const favicon = require('serve-favicon');
 require('./config/config');
 const db = require('./db/db');
 
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'dev') {
+    app.use(morgan('dev'));
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'client/')));
@@ -21,4 +23,6 @@ app.get('*', (req, res) => {
 });
 
 app.listen(process.env.PORT);
-console.log(`Magic happens at http://localhost:${process.env.PORT}`);
+console.log(`Server running at http://localhost:${process.env.PORT}`);
+
+module.exports = {app, db};

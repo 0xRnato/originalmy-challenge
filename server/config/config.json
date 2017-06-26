@@ -7,26 +7,29 @@
     "DB_PW": "root",
     "DB_PROTOCOL": "mysql",
     "DB_PORT": "3306",
-    "JWT_SECRET": "0r1g1n4lmy-dev"
+    "JWT_SECRET": "0r1g1n4lmy-dev",
+    "TIMEOUT": "2m"
   },
   "test": {
-    "PORT": 3000,
+    "PORT": 3003,
     "DB_HOST": "localhost",
     "DB_DB":"originalmy-test",
     "DB_USER":"root",
     "DB_PW": "root",
     "DB_PROTOCOL": "mysql",
     "DB_PORT": "3306",
-    "JWT_SECRET": "0r1g1n4lmy-test"
+    "JWT_SECRET": "0r1g1n4lmy-test",
+    "TIMEOUT": "5s"
   },
   "prod": {
-    "PORT": 3000,
+    "PORT": 4000,
     "DB_HOST": "localhost",
     "DB_DB":"originalmy-prod",
     "DB_USER":"root",
     "DB_PW": "root",
     "DB_PROTOCOL": "mysql",
     "DB_PORT": "3306",
-    "JWT_SECRET": "0r1g1n4lmy-prod"
+    "JWT_SECRET": "0r1g1n4lmy-prod",
+    "TIMEOUT": 3600
   }
 }
