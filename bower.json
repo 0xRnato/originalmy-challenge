@@ -1,6 +1,6 @@
 {
   "name": "originalmy-challenge",
-  "description": "",
+  "description": "This is a simple application of a login REST API with a chat made with Socket.IO",
   "main": "server/server.js",
   "authors": [
     "Renato Neto <rnato.netoo@gmail.com>"

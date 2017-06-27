@@ -1,7 +1,7 @@
 {
   "name": "originalmy-challenge",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a simple application of a login REST API with a chat made with Socket.IO",
   "main": "server/server.js",
   "scripts": {
     "test": "export NODE_ENV='test' || SET NODE_ENV='test' && mocha --timeout 60000",
@@ -9,9 +9,27 @@
     "dev": "export NODE_ENV='dev' || SET NODE_ENV='dev' && nodemon server/server.js",
     "prod": "export NODE_ENV='prod' || SET NODE_ENV='prod' && pm2 start server/server.js -i 0 --name 'OriginalMy-server'"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "socket.IO",
+    "API",
+    "REST",
+    "Login",
+    "OriginalMy",
+    "NodeJs"
+  ],
+  "author": {
+    "name": "Renato Neto",
+    "email": "rnato.netoo@gmail.com"
+  },
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zRnatoNeto/originalmy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zRnatoNeto/originalmy/issues"
+  },
+  "homepage": "https://github.com/zRnatoNeto/originalmy#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
