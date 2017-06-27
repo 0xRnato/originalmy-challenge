@@ -31,7 +31,6 @@ module.exports = (app, db) => {
     });
 
     router.post('/logout', auth, (req, res) => {
-        console.log(req.body.userData);
         UserController.removeToken(req.body.userData).then((data) => {
             res.send(data);
         }).catch((err) => {

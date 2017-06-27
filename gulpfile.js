@@ -6,7 +6,7 @@ const babel = require('gulp-babel');
 const minify = require('gulp-minify');
 const cleanCSS = require('gulp-clean-css');
 
-gulp.task('dev', ['watch', 'replace', 'minify-main', 'minify-controllers', 'minify-services', 'minify-css']);
+gulp.task('default', ['watch', 'replace', 'minify-main', 'minify-controllers', 'minify-services', 'minify-css']);
 
 gulp.task('prod', ['replace', 'minify-main', 'minify-controllers', 'minify-services', 'minify-css']);
 

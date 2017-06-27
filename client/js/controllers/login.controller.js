@@ -36,6 +36,8 @@
                         vm.userSession = userSession;
                         $rootScope.userSession = angular.copy(vm.userSession);
                         $mdToast.show($mdToast.simple().textContent('Welcome ' + userSession.username));
+                        $rootScope.socket = io();
+                        $rootScope.socket.emit('login', userSession.username);
                         $location.path('/chat');
                     } else {
                         $mdToast.show($mdToast.simple().textContent(response.data.err));

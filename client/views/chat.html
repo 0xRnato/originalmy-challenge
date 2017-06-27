@@ -6,4 +6,29 @@
             <md-button aria-label="logout" ng-click="chatController.logout()"> logout </md-button>
         </div>
     </md-toolbar>
+
+    <section layout="row" layout-wrap layout-align="center" class="chat-section">
+        <md-list class="md-dense" id="chat" flex style="overflow-y: scroll;">
+            <md-list-item class="md-3-line" ng-repeat="item in chatController.messages">
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{ item.from }}:</h3>
+                    <h4>{{ item.message }}</h4>
+                </div>
+                <md-divider ></md-divider>
+            </md-list-item>
+        </md-list>
+    </section>
 </md-content>
+<md-toolbar class="md-primary" id="bot">
+    <div class="md-toolbar-tools">
+        <form ng-submit="chatController.sendMsg()" class="chat-input" layout="row">
+        <span flex></span>
+            <md-input-container style="width: 50%">
+                <label>Type a message</label>
+                <input ng-model="chatController.message">
+            </md-input-container>
+            <md-button class="md-raised md-warn" type="submit" style="width: 10%;margin-top: -25px;" aria-label="Send">Send</md-button>
+        <span flex></span>
+        </form>
+    </div>
+</md-toolbar>
