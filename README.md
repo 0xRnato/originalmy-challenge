@@ -4,7 +4,7 @@ This is a simple application of a login REST API with a chat made with Socket.IO
 
 To run the application locally you will need to have NodeJs, NPM, Bower and MySQL installed on your computer
 
-First of all it is necessary that you load the database.sql that is in the root of the project in your Database.
+First of all it is necessary that you load the database.sql that is in the root of the project in your database and put the credentials of access to your database in the file: server/config/config.json.
 
 To install dependencies run:
 
